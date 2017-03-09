@@ -1,7 +1,7 @@
 ##libraries##
 library(ggplot2)
 library(plyr)
-library(dplyr)
+
 
 
 ##load data##
@@ -34,4 +34,15 @@ pie <- p+coord_polar("y") +
 
 pie
 
-  
+
+
+### Frequency of Overtime Periods
+
+rs_ot_freq<-as.data.frame(count(rsdr, Numot))
+rs_ot_freq$n <- as.factor(rs_ot_freq$n)
+
+ggplot(rs_ot_freq, aes(x=Numot, y=n)) + ggtitle("Season: Number of Overtime Periods") +
+  geom_bar(stat='identity') + 
+  xlab("Overtime Periods") + 
+  ylab('Frequency') + 
+  geom_text(aes(label=Numot), vjust=-0.3, size=3.5)
